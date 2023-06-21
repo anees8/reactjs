@@ -13,7 +13,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserApi, updateUserApi } from "../../api/UserApi";
 import { usersError } from "../../store/slices/UserSlice";
-export default function AddUserDialog({ open, onClose, user }) {
+export default function AddUserDialog({ open, onClose, user,limit,page }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -50,7 +50,7 @@ export default function AddUserDialog({ open, onClose, user }) {
 
     if (user?._id) {
       // If user prop is provided, update the existing user
-      dispatch(updateUserApi(user._id, userData, handleClose));
+      dispatch(updateUserApi(user._id, userData, handleClose,limit,page));
     } else {
       // If user prop is not provided, add a new user
       dispatch(addUserApi(userData, handleClose));
@@ -127,7 +127,7 @@ open={open} onClose={handleClose}>
         </>)}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} variant="contained" color="error">
+        <Button onClick={handleClose} variant="contained"  color="secondary">
           Cancel
         </Button>
         <Button onClick={handleAddUser} variant="contained" color="primary">

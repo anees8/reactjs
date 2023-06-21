@@ -49,12 +49,12 @@ export const addUserApi = (userdata, handleClose) => {
   };
 };
 
-export const updateUserApi = (id, userdata, handleClose) => {
+export const updateUserApi = (id, userdata, handleClose,limit,page) => {
   return async (dispatch) => {
     try {
       const response = await URL.patch(`${USERS_API}/${id}`, userdata);
 
-      dispatch(fetchAllUsersApi());
+      dispatch(fetchAllUsersApi(limit,page));
       handleClose();
     } catch (error) {
       dispatch(usersError(error.response.data.error));
@@ -65,22 +65,23 @@ export const updateUserApi = (id, userdata, handleClose) => {
   };
 };
 
-export const fetchAllUsersApi = () => {
+export const fetchAllUsersApi = (limit,page) => {
   return async (dispatch) => {
     try {
-      const response = await URL.get(`${USERS_API}`);
-      dispatch(setUsers(response.data.users));
+      const response = await URL.get(`${USERS_API}?page=${page}&limit=${limit}`);
+      
+      dispatch(setUsers(response.data));
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-export const deleteUser = (id) => {
+export const deleteUser = (id,limit,page) => {
   return async (dispatch) => {
     try {
       const response = await URL.delete(`${USERS_API}/${id}`);
-      dispatch(fetchAllUsersApi());
+      dispatch(fetchAllUsersApi(limit,page));
     } catch (err) {
       console.log(err);
     }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { TextField, IconButton, InputAdornment } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { TextField,Alert, IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff,AlternateEmail,Password} from "@mui/icons-material";
 import LoginIcon from "@mui/icons-material/Login";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -43,27 +43,42 @@ const Login = () => {
       <div className="card col-lg-4 col-md-6 col-sm-8 text-center px-3 py-4">
         <form>
           <h1 className="text-center mb-3">Login</h1>
-
+          {error && error.error && 
+          <Alert className="mb-2" severity="error">{error?.error || ""}</Alert>
+        }
           <TextField
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AlternateEmail />
+                </InputAdornment>
+              ),
+            }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             sx={{ my: 1 }}
             label="Email"
             fullWidth
-            error={!!error?.email}
+            error={!!error?.email || !!error?.error}
             helperText={error?.email || ""}
           />
 
           <TextField
+          
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             sx={{ my: 1 }}
             label="Password"
             fullWidth
             type={showPassword ? "text" : "password"}
-            error={!!error?.password}
+            error={!!error?.password || !!error?.error}
             helperText={error?.password || ""}
             InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Password />
+                </InputAdornment>
+              ),
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton

@@ -15,8 +15,8 @@ export default function DeleteUserDialog({ open, onClose, onDelete }) {
         <p>Are you sure you want to delete this user?</p>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={onDelete} color="error">
+        <Button onClick={onClose} variant="contained" color="secondary">Cancel</Button>
+        <Button onClick={onDelete} variant="contained" color="error">
           Delete
         </Button>
       </DialogActions>
