@@ -5,7 +5,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginApi } from "../api/UserApi";
+import { loginApi } from "../../api/UserApi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -47,18 +47,13 @@ const Login = () => {
           <Alert className="mb-2" severity="error">{error?.error || ""}</Alert>
         }
           <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AlternateEmail />
-                </InputAdornment>
-              ),
-            }}
+           
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             sx={{ my: 1 }}
             label="Email"
             fullWidth
+            size="medium"
             error={!!error?.email || !!error?.error}
             helperText={error?.email || ""}
           />
@@ -69,16 +64,13 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             sx={{ my: 1 }}
             label="Password"
+            size="medium"
             fullWidth
             type={showPassword ? "text" : "password"}
             error={!!error?.password || !!error?.error}
             helperText={error?.password || ""}
             InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Password />
-                </InputAdornment>
-              ),
+            
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
@@ -97,6 +89,7 @@ const Login = () => {
             className="btn btn-dark btn-block "
             disabled={loading}
             onClick={handleLogin}
+          
           >
             {loading ? (
               <>

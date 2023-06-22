@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Common/Navbar";
 import { Route, Routes, useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
-import Users from "./components/Users";
-import Login from "./components/Login";
+import Users from "./components/Users/index";
+import Login from "./components/Login/index";
 import Employee from "./components/Employee";
 
 const App = () => {

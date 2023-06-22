@@ -1,12 +1,12 @@
 import { URL } from "./index";
-import { USERS_API } from "../config/constant/apiConstant.js";
+import { USERS_API,POST_REGISTER_API,POST_LOGIN_API,POST_LOGOUT_API } from "../config/constant/apiConstant.js";
 import { usersError, setUsers } from "../store/slices/UserSlice";
 import { loginUser, logoutUser, loginError } from "../store/slices/LoginSlice";
 
 export const loginApi = (credentials, navigate) => {
   return async (dispatch) => {
     try {
-      const response = await URL.post(`login`, credentials);
+      const response = await URL.post(`${POST_LOGIN_API}`, credentials);
       dispatch(loginUser(response.data));
       URL.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
       navigate("/users");
@@ -18,10 +18,11 @@ export const loginApi = (credentials, navigate) => {
     }
   };
 };
+
 export const logoutApi = (navigate) => {
   return async (dispatch) => {
     try {
-      const response = await URL.post(`logout`);
+      const response = await URL.post(`${POST_LOGOUT_API}`);
       dispatch(logoutUser());
       navigate("/");
     } catch (error) {
@@ -36,7 +37,7 @@ export const logoutApi = (navigate) => {
 export const addUserApi = (userdata, handleClose) => {
   return async (dispatch) => {
     try {
-      const response = await URL.post(`register`, userdata);
+      const response = await URL.post(`${POST_REGISTER_API}`, userdata);
 
       dispatch(fetchAllUsersApi());
       handleClose();

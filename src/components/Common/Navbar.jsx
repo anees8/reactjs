@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
-import { logoutApi } from "../api/UserApi";
+import { logoutApi } from "../../api/UserApi";
 const pages = ["Users", "Employee"];
 
 function Navbar() {

@@ -10,12 +10,12 @@ import {
   Button,TablePagination, Container
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllUsersApi, deleteUser } from "../api/UserApi";
+import { fetchAllUsersApi, deleteUser } from "../../api/UserApi";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteUserDialog from "./Users/DeleteUserDialog";
-import AddUserDialog from "./Users/AddUserDialog";
+import DeleteUserDialog from "./DeleteUserDialog";
+import AddUserDialog from "./AddUserDialog";
 
 export default function Users() {
   const users = useSelector((state) => state.users.users);
@@ -93,7 +93,19 @@ export default function Users() {
     </Button>
   </div>
 
-    <TableContainer sx={{width: '100%', overflow: 'hidden' }} component={Paper}> 
+    <TableContainer sx={{maxHeight:'calc(100vh - 250px)', width: '100%',overflow: 'auto',
+        scrollbarWidth: 'auto',
+        scrollbarColor: '#888888 #ffffff', // Adjust colors as needed
+        '&::-webkit-scrollbar': {
+          width: '2px' // Adjust the width as needed
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: '#888888' // Adjust color as needed
+        },
+        '&::-webkit-scrollbar-track': {
+          backgroundColor: '#ffffff' // Adjust color as needed
+        }
+ }} component={Paper}> 
       <Table size="small">
         <TableHead>
           <TableRow>
