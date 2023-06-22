@@ -1,10 +1,10 @@
 import axios from "axios";
-import { BASE_URL } from "../config/constant/apiConstant.js";
+import { BASE_API_URL } from "../config/constant/apiConstant.js";
 import Chance from "chance";
 const chance = Chance();
 
 export const URL = axios.create({
-  baseURL: BASE_URL
+  baseURL: BASE_API_URL
 });
 
 const token = localStorage.getItem("token");

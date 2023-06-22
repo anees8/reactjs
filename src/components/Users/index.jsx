@@ -121,7 +121,13 @@ export default function Users() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user) => (
+
+            {users.length === 0 ? (
+  <TableRow>
+    <TableCell colSpan={4}>No records found.</TableCell>
+  </TableRow>
+) : (
+        users.map((user) => (
                 <TableRow key={user._id}>
                   <TableCell>{user._id}</TableCell>
                   <TableCell>{user.name}</TableCell>
@@ -147,7 +153,8 @@ export default function Users() {
                     </Button>
                   </TableCell>
                 </TableRow>
-              ))}
+               ))
+               )}
             </TableBody>
           </Table>
           <AddUserDialog
