@@ -53,7 +53,7 @@ export default function AddUserDialog({ open, onClose, user,limit,page }) {
       dispatch(updateUserApi(user._id, userData, handleClose,limit,page));
     } else {
       // If user prop is not provided, add a new user
-      dispatch(addUserApi(userData, handleClose));
+      dispatch(addUserApi(userData, handleClose,limit,page));
     }
   };
   const resetForm = () => {

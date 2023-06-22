@@ -34,12 +34,12 @@ export const logoutApi = (navigate) => {
   };
 };
 
-export const addUserApi = (userdata, handleClose) => {
+export const addUserApi = (userdata, handleClose,limit,page) => {
   return async (dispatch) => {
     try {
       const response = await URL.post(`${POST_REGISTER_API}`, userdata);
 
-      dispatch(fetchAllUsersApi());
+      dispatch(fetchAllUsersApi(limit,page));
       handleClose();
     } catch (error) {
       dispatch(usersError(error.response.data.error));

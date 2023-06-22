@@ -4,7 +4,9 @@ import { Route, Routes, useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import Users from "./components/Users/index";
 import Login from "./components/Login/index";
-import Employee from "./components/Employee";
+import Employee from "./components/Employee/index";
+import Product from "./components/Product/index";
+
 
 const App = () => {
   const location = useLocation();
@@ -27,6 +29,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/users" element={<Users />} />
         <Route path="employee" element={<Employee />} />
+        <Route path="product" element={<Product />} />
       </Routes>
     </>
   );

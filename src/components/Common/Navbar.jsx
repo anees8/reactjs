@@ -15,7 +15,11 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 import { logoutApi } from "../../api/UserApi";
-const pages = ["Users", "Employee"];
+const pages = [ 
+{ url: '/users', name: 'Users' },
+{ url: '/employee', name: 'Employee' },
+{ url: '/product', name: 'Product' }
+];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -91,10 +95,10 @@ function Navbar() {
                 <Link
                   key={index}
                   style={{ textDecoration: "none", color: "black" }}
-                  to={`/${page}`}
+                  to={`${page.url}`}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center"> {page}</Typography>
+                    <Typography textAlign="center"> {page.name}</Typography>
                   </MenuItem>
                 </Link>
               ))}
@@ -124,14 +128,14 @@ function Navbar() {
               <Link
                 key={index}
                 style={{ textDecoration: "none", color: "white" }}
-                to={`/${page}`}
+                to={`${page.url}`}
               >
                 {" "}
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {page}
+                  {page.name}
                 </Button>
               </Link>
             ))}
