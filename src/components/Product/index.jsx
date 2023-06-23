@@ -93,22 +93,23 @@ const Product = () => {
       </div>
 
       <TableContainer
-        sx={{
-          maxHeight: "calc(100vh - 250px)",
-          width: "100%",
-          overflow: "auto",
-          scrollbarWidth: "auto",
-          scrollbarColor: "#888888 #ffffff", // Adjust colors as needed
-          "&::-webkit-scrollbar": {
-            width: "2px" // Adjust the width as needed
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#888888" // Adjust color as needed
-          },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: "#ffffff" // Adjust color as needed
-          }
-        }}
+       sx={{
+        maxHeight: "calc(100vh - 250px)",
+        width: "100%",
+        overflow: "auto",
+        scrollbarWidth: "auto",
+        scrollbarColor: "#888888 #ffffff", // Adjust colors as needed
+        "&::-webkit-scrollbar": {
+          width: "2px", // Adjust the width as needed
+          height: "2px" 
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#888888" // Adjust color as needed
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "#ffffff" // Adjust color as needed
+        }
+      }}
         component={Paper}
       >
         <Table size="small">
@@ -141,7 +142,7 @@ const Product = () => {
                   <Button
                     variant="outlined"
                     color="secondary"
-                    sx={{ marginLeft: "1rem" }}
+                    sx={{ margin: "1rem" }}
                     onClick={() => openAddProductDialog(product)}
                   >
                     {" "}
@@ -150,7 +151,7 @@ const Product = () => {
                   <Button
                     variant="outlined"
                     color="error"
-                    sx={{ marginLeft: "1rem" }}
+                    sx={{ margin: "1rem" }}
                     onClick={() => openDeleteConfirmation(product._id)}
                   >
                     {" "}
@@ -174,7 +175,7 @@ const Product = () => {
           open={!!deleteConfirmation}
           onClose={closeDeleteConfirmation}
           onDelete={() => deleteSingleProduct(deleteConfirmation)}
-          id={deleteConfirmation}
+          
         />
       </TableContainer>
       <TablePagination

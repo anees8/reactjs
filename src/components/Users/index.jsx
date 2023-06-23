@@ -100,7 +100,8 @@ export default function Users() {
             scrollbarWidth: "auto",
             scrollbarColor: "#888888 #ffffff", // Adjust colors as needed
             "&::-webkit-scrollbar": {
-              width: "2px" // Adjust the width as needed
+              width: "2px", // Adjust the width as needed
+              height: "2px" 
             },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor: "#888888" // Adjust color as needed
@@ -136,7 +137,7 @@ export default function Users() {
                     <Button
                       variant="outlined"
                       color="secondary"
-                      sx={{ marginLeft: "1rem" }}
+                      sx={{ margin: "1px" }}
                       onClick={() => openAddUserDialog(user)}
                     >
                       {" "}
@@ -145,7 +146,7 @@ export default function Users() {
                     <Button
                       variant="outlined"
                       color="error"
-                      sx={{ marginLeft: "1rem" }}
+                      sx={{ margin: "1px" }}
                       onClick={() => openDeleteConfirmation(user._id)}
                     >
                       {" "}

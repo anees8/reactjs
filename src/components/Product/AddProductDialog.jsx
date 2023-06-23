@@ -7,10 +7,11 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+
 import { useDispatch, useSelector } from "react-redux";
 import { addProductApi, updateProductApi } from "../../api/ProductApi";
 import { productError } from "../../store/slices/ProductSlice";
+
 export default function AddProductDialog({ open, onClose, product,limit,page }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
