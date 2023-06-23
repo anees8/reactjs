@@ -20,6 +20,7 @@ import DeleteUserDialog from "./DeleteUserDialog";
 import AddUserDialog from "./AddUserDialog";
 
 export default function Users() {
+  
   const users = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
@@ -172,7 +173,7 @@ export default function Users() {
           />
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 100]}
+          rowsPerPageOptions={[5, 10, 25, 100 , { value: -1, label: 'All' }]}
           component="div"
           count={totalRow}
           rowsPerPage={limit}

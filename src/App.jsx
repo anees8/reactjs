@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/Common/Navbar";
 import { Route, Routes, useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,8 @@ import Users from "./components/Users/index";
 import Login from "./components/Login/index";
 import Employee from "./components/Employee/index";
 import Product from "./components/Product/index";
-import { Container, CircularProgress } from "@mui/material";
-
-
+import { Backdrop, CircularProgress } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
   const location = useLocation();
@@ -16,10 +15,7 @@ const App = () => {
   const hideNavbar = hideNavbarRoutes.includes(location.pathname);
   const navigate = useNavigate();
   const storedToken = localStorage.getItem("token");
-  const [isLoading, setIsLoading] = useState(true); // Loading state
-  setTimeout(() => {
-    setIsLoading(false);
-    }, 500);
+  const loading = useSelector((state) => state.login.loading);
 
   useEffect(() => {
     if (!storedToken && location.pathname !== "/") {
@@ -27,15 +23,17 @@ const App = () => {
     }
   }, [storedToken, location.pathname, navigate]);
 
-  if (isLoading) {
-    return   <Container  sx={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
-    }}>
-    <CircularProgress />
-  </Container>; // Render a loading indicator while loading
+  if (loading) {
+    return (
+      <>
+        <Backdrop
+          sx={{ color: "#1976d2", zIndex: (theme) => theme.zIndex.drawer + 1 ,background: "rgba(25,118,210,0.1)" }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </>
+    );
   }
   return (
     <>

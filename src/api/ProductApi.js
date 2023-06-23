@@ -4,8 +4,14 @@ import { productError, setProducts } from "../store/slices/ProductSlice";
 
 export const fetchAllProductsApi = (limit,page) => {
         return async (dispatch) => {
-        try {
-        const response = await URL.get(`${PRODUCTS_API}?page=${page}&limit=${limit}`);
+          try {
+          let url = `${PRODUCTS_API}?page=${page}`;
+
+          if (limit !== -1) {
+          url += `&limit=${limit}`;
+          }
+          const response = await URL.get(url);
+
         dispatch(setProducts(response.data));
         } catch (err) {
         dispatch(productError(err.response));

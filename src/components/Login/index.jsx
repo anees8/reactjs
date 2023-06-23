@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField,Alert, IconButton, InputAdornment } from "@mui/material";
-import { Visibility, VisibilityOff,AlternateEmail,Password} from "@mui/icons-material";
+import { Visibility, VisibilityOff} from "@mui/icons-material";
 import LoginIcon from "@mui/icons-material/Login";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.login.loading);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,12 +30,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setLoading(true);
     dispatch(loginApi({ email, password }, navigate));
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
   };
 
   return (

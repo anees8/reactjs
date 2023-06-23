@@ -142,7 +142,7 @@ const Product = () => {
                   <Button
                     variant="outlined"
                     color="secondary"
-                    sx={{ margin: "1rem" }}
+                    sx={{ margin: "2px" }}
                     onClick={() => openAddProductDialog(product)}
                   >
                     {" "}
@@ -151,7 +151,7 @@ const Product = () => {
                   <Button
                     variant="outlined"
                     color="error"
-                    sx={{ margin: "1rem" }}
+                    sx={{ margin: "2px" }}
                     onClick={() => openDeleteConfirmation(product._id)}
                   >
                     {" "}
@@ -179,7 +179,7 @@ const Product = () => {
         />
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 100]}
+      rowsPerPageOptions={[5, 10, 25, 100 , { value: -1, label: 'All' }]}
         component="div"
         count={totalRow}
         rowsPerPage={limit}

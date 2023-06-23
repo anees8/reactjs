@@ -10,21 +10,24 @@ const loginSlice = createSlice({
   reducers: {
     loginUser(state, action) {
       state.token = action.payload.token;
-      state.loading = false;
       localStorage.setItem("token", action.payload.token);
     },
 
     logoutUser(state, action) {
       state.token = null;
-      state.loading = false;
       localStorage.removeItem("token");
     },
 
     loginError(state, action) {
       state.error = action.payload;
+      
+    },
+    setLoader(state, action){
+      state.loading = action.payload;
+    
     }
   }
 });
 
 export default loginSlice.reducer;
-export const { loginUser, logoutUser, loginError } = loginSlice.actions;
+export const { loginUser, logoutUser, loginError,setLoader } = loginSlice.actions;
