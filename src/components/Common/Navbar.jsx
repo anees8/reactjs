@@ -18,7 +18,7 @@ import { logoutApi } from "../../api/UserApi";
 const pages = [ 
 { url: '/users', name: 'Users' },
 { url: '/employee', name: 'Employee' },
-{ url: '/product', name: 'Product' }
+{ url: '/product', name: 'Product' },
 ];
 
 function Navbar() {

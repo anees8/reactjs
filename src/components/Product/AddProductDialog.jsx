@@ -121,18 +121,20 @@ open={open} onClose={handleClose}>
           helperText={error?.price || ""}
         />
 
-        <TextField
-        id="outlined-basic"
-        label="Images"
-        variant="outlined"
-        type="file"
-        
-        sx={{ my: 1 }}
-        fullWidth
-        inputProps={{
-        multiple: true
-        }}
-        onChange={handleFileChange}
+          <TextField
+          id="outlined-basic"
+          label="Images"
+          variant="outlined"
+          type="file"
+          sx={{ my: 1 }}
+          fullWidth
+          inputProps={{
+          multiple: true,
+          accept: "image/png, image/jpeg",
+          }}  
+           onChange={handleFileChange}
+          error={!!error?.images}
+          helperText={error?.images || ""}
         />
          <div>
 

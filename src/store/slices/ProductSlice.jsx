@@ -8,17 +8,20 @@ const productSlice = createSlice({
     limit:10,
     totalRow:0,
     loading: false, // To track if the API request is in progress
-    error: null // To store any error occurred during API request
+    error: null, // To store any error occurred during API request
+    orderBy:null,
   },
   reducers: {
     setProducts(state, action) {
-    
       state.products = action.payload.products;
       state.page = action.payload.currentPage-1;
       state.limit = action.payload.limit;
       state.totalRow=action.payload.totalRow;
+      
     },
-  
+    setOrderBy(state,action){
+      state.orderBy=action.payload;
+    },
     productError(state, action) {
       state.error = action.payload;
     }
@@ -26,4 +29,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { setProducts, productError } = productSlice.actions;
+export const { setProducts, productError,setOrderBy } = productSlice.actions;
