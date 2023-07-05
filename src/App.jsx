@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import {Box} from "@mui/material";
+import VISITER_ROUTES from './routes/userRoute'
 
-import Users from "./components/Users/index";
-import Login from "./components/Login/index";
-import Employee from "./components/Employee/index";
-import Product from "./components/Product/index";
+// import Users from "./components/Users/index";
+ import Login from "./components/Login/index";
+// import Employee from "./components/Employee/index";
+// import Product from "./components/Product/index";
 import Loader from "./components/Common/Loader";
 import Sidebar from "./components/Common/Sidebar/Sidebar";
 import DrawerHeader from './components/Common/Sidebar/DrawerHeader'
@@ -34,20 +36,19 @@ const App = () => {
   return (
     <>
       {!hideNavbar && (
-        <>
+       
           <Box sx={{ display: "flex" }}>
             <Sidebar />
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <DrawerHeader />
               <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="employee" element={<Employee />} />
-                <Route path="product" element={<Product />} />
+                {VISITER_ROUTES.map(({path,Component},index) => (
+                <Route path={path} element={<Component/>} key={index} />
+
+                ))}
               </Routes>
             </Box>
           </Box>
-        </>
       )}
       {hideNavbar && (
         <Routes>

@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginApi } from "../../api/UserApi";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("mehran@yopmail.com");
+  const [password, setPassword] = useState("Meh@123");
   const [showPassword, setShowPassword] = useState(false);
   const loading = useSelector((state) => state.login.loading);
 

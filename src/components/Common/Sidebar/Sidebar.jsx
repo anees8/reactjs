@@ -45,8 +45,8 @@ const Sidebar = () => {
 
   const pages = [
     { id: 2, url: "/users", name: "Users", icon: <PersonIcon /> },
-    { id: 1, url: "/employee", name: "Employee", icon: <BadgeOutlinedIcon /> },
-    { id: 3, url: "/product", name: "Product", icon: <StoreOutlinedIcon /> }
+    { id: 1, url: "/employees", name: "Employees", icon: <BadgeOutlinedIcon /> },
+    { id: 3, url: "/products", name: "Products", icon: <StoreOutlinedIcon /> }
   ];
 
   return (
