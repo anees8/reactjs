@@ -98,14 +98,13 @@ const Product = () => {
 
   return (
     <>
-      <Container>
+     
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "20px",
-            marginBottom: "10px"
+           
           }}
         >
           <div><TextField
@@ -256,7 +255,7 @@ const Product = () => {
           showFirstButton={true}
           showLastButton={true}
         />
-      </Container>
+      
     </>
   );
 };

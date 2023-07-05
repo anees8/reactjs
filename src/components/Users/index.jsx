@@ -73,20 +73,21 @@ export default function Users() {
 
   return (
     <>
-      <Container>
+     
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "20px",
-            marginBottom: "10px"
+      
+           
           }}
         >
           <div></div> {/* Empty div for spacing */}
           <Button
             variant="outlined"
             color="primary"
+            style={{ marginBottom: "10px"}}
             onClick={openAddUserDialog}
           >
             <AddIcon /> User
@@ -183,7 +184,7 @@ export default function Users() {
           showFirstButton={true}
           showLastButton={true}
         />
-      </Container>
+   
     </>
   );
 }
