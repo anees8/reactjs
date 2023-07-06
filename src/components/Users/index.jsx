@@ -9,7 +9,6 @@ import {
   Paper,
   Button,
   TablePagination,
-  Container
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllUsersApi, deleteUser } from "../../api/UserApi";

@@ -30,6 +30,7 @@ import { logoutApi } from "../../../api/UserApi";
 const Sidebar = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const navigate = useNavigate();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -44,15 +45,15 @@ const Sidebar = () => {
   };
 
   const pages = [
-    { id: 2, url: "/users", name: "Users", icon: <PersonIcon /> },
-    { id: 1, url: "/employees", name: "Employees", icon: <BadgeOutlinedIcon /> },
-    { id: 3, url: "/products", name: "Products", icon: <StoreOutlinedIcon /> }
+    { id: 2, url: "/user", name: "Users", icon: <PersonIcon /> },
+    { id: 1, url: "/employee", name: "Employees", icon: <BadgeOutlinedIcon /> },
+    { id: 3, url: "/product", name: "Products", icon: <StoreOutlinedIcon /> }
   ];
 
   return (
     <>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed"  open={open} sx={{backgroundColor: "#fff",color:"#1976d2" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -66,9 +67,12 @@ const Sidebar = () => {
           >
             <MenuIcon />
           </IconButton>
+          {!open &&
+       
           <Typography variant="h6" noWrap component="div">
-            Colan Infotech
+             <img  src="./logo/logo.png" width={180} />
           </Typography>
+          }
           <Box
             sx={{
               flexGrow: 0,
@@ -79,15 +83,21 @@ const Sidebar = () => {
             <Button
               onClick={handleLogout}
               startIcon={<LogoutOutlinedIcon />}
-              sx={{ my: 2, color: "white" }}
+              sx={{ my: 2, color: "#1976d2" }}
             >
               Logout
             </Button>
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader onClick={handleDrawerClose}>
+     
+      <Drawer   variant="permanent" open={open} >
+     
+        <DrawerHeader  onClick={handleDrawerClose}>
+        {open &&
+      
+          <Box>
+            <img src="./logo/logo.png" width={180} />
           <IconButton>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -95,13 +105,15 @@ const Sidebar = () => {
               <ChevronLeftIcon />
             )}
           </IconButton>
+          </Box> }
         </DrawerHeader>
+    
         <List>
           <Divider />
           {pages
             .sort((a, b) => a.id - b.id)
             .map((page) => (
-              <MenuItems page={page} key={page.id} />
+              <MenuItems page={page} key={page.id} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>
             ))}
         </List>
       </Drawer>

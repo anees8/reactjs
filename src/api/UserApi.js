@@ -27,7 +27,7 @@ export const loginApi = (credentials, navigate) => {
         dispatch(setLoader(false));
       }, 800);
 
-      navigate("/users");
+      navigate("/user");
     } catch (error) {
       dispatch(loginError(error.response.data.error));
 
