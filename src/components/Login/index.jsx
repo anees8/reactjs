@@ -24,7 +24,7 @@ const Login = () => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
-      navigate("/users"); // Redirect to dashboard if token exists
+      navigate("/dashboard"); // Redirect to dashboard if token exists
     }
   }, [navigate]);
 

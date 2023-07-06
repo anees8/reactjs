@@ -44,10 +44,10 @@ const App = () => {
   return (
     <>
       {!hideNavbar && (
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex"  }}>
           <Sidebar  />
         
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Box component="main" sx={{ flexGrow: 1, p: 3,minHeight:"100vh",backgroundColor:"#f0f2f5"}}>
           {loading ? (<Loader loading={loading} />):<>
             <DrawerHeader />
             <Routes>

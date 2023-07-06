@@ -19,6 +19,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -45,9 +46,10 @@ const Sidebar = () => {
   };
 
   const pages = [
+    { id: 1, url: "/dashboard", name: "Dashboard", icon: <DashboardIcon /> },
     { id: 2, url: "/user", name: "Users", icon: <PersonIcon /> },
-    { id: 1, url: "/employee", name: "Employees", icon: <BadgeOutlinedIcon /> },
-    { id: 3, url: "/product", name: "Products", icon: <StoreOutlinedIcon /> }
+    { id: 3, url: "/employee", name: "Employees", icon: <BadgeOutlinedIcon /> },
+    { id: 4, url: "/product", name: "Products", icon: <StoreOutlinedIcon /> }
   ];
 
   return (
