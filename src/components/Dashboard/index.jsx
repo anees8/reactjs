@@ -5,7 +5,7 @@ import DashboardChart from "./DashboardChart/index";
 
 const Dashboard = () => {
   return (
-      <Container maxWidth="xxl">
+      <Container maxWidth="xl">
       <Box sx={{marginBottom:"40px"}}>
       <DashboardCard />  
       </Box> 
