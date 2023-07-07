@@ -8,7 +8,8 @@ import {
   Toolbar,
   CssBaseline,
   Button,
-  useTheme
+  useTheme,
+
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -30,6 +31,7 @@ import { logoutApi } from "../../../api/UserApi";
 
 const Sidebar = () => {
   const theme = useTheme();
+  
   const [open, setOpen] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const navigate = useNavigate();
