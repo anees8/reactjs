@@ -5,3 +5,5 @@ export const POST_LOGIN_API='login';
 export const POST_LOGOUT_API='logout';
 export const POST_REGISTER_API='register';
 export const PRODUCTS_API='products';
+export const CATEGORIES_API='categories';
+export const CATEGORY_API='category';

@@ -20,6 +20,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import { useNavigate } from "react-router-dom";
@@ -49,9 +50,10 @@ const Sidebar = () => {
 
   const pages = [
     { id: 1, url: "/dashboard", name: "Dashboard", icon: <DashboardIcon /> },
-    { id: 2, url: "/user", name: "Users", icon: <PersonIcon /> },
-    { id: 3, url: "/employee", name: "Employees", icon: <BadgeOutlinedIcon /> },
-    { id: 4, url: "/product", name: "Products", icon: <StoreOutlinedIcon /> }
+    { id: 2, url: "/users", name: "Users", icon: <PersonIcon /> },
+    { id: 3, url: "/employees", name: "Employees", icon: <BadgeOutlinedIcon /> },
+    { id: 4, url: "/categories", name: "Categories", icon: <CategoryOutlinedIcon /> },
+    { id: 5, url: "/products", name: "Products", icon: <StoreOutlinedIcon /> }
   ];
 
   return (
