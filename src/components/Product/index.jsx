@@ -168,6 +168,16 @@ const Product = () => {
                     <UnfoldMoreOutlinedIcon style={{ opacity: 0.5 }} />
                   )}
                 </TableCell>
+                <TableCell onClick={() => handleSort("category")}>
+                Category{" "}
+                  {orderBy === "category" ? (
+                    <ArrowDropDownIcon />
+                  ) : orderBy === "-category" ? (
+                    <ArrowDropUpIcon />
+                  ) : (
+                    <UnfoldMoreOutlinedIcon style={{ opacity: 0.5 }} />
+                  )}
+                </TableCell>
                 <TableCell onClick={() => handleSort("price")}>
                   Price{" "}
                   {orderBy === "price" ? (
@@ -193,6 +203,7 @@ const Product = () => {
                     <TableCell>{product._id}</TableCell>
                     <TableCell>{product.name}</TableCell>
                     <TableCell>{product.description}</TableCell>
+                    <TableCell>{product.category.name}</TableCell>
                     <TableCell>{product.price}</TableCell>
                     <TableCell>
                       {" "}

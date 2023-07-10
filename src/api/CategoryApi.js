@@ -1,5 +1,9 @@
 import { URL } from "./index";
-import { CATEGORIES_API,CATEGORY_API,CATEGORY_STATUS_API } from "../config/constant/apiConstant.js";
+import {
+  CATEGORIES_API,
+  CATEGORY_API,
+  CATEGORY_STATUS_API
+} from "../config/constant/apiConstant.js";
 import { categoryError, setCategories } from "../store/slices/CategorySlice";
 
 export const fetchAllCategoriesApi = (limit, page, sortDirection, search) => {
@@ -34,7 +38,6 @@ export const deleteCategoryApi = (id, limit, page) => {
       const response = await URL.delete(`${CATEGORY_API}/${id}`);
       dispatch(fetchAllCategoriesApi(limit, page));
     } catch (err) {
-
       dispatch(categoryError(err.response));
       setTimeout(() => {
         dispatch(categoryError(null));
@@ -48,11 +51,18 @@ export const addCategoryApi = (categorydata, handleClose, limit, page) => {
     try {
       const formData = new FormData();
       // Append other category data to the form data
-      formData.append("name", categorydata.name);
-      formData.append("description", categorydata.description);     
-      formData.append("status", categorydata.status);
-      formData.append(`images`, categorydata.images);
-      
+      if (categorydata.name) {
+        formData.append("name", categorydata.name);
+      }
+      if (categorydata.description) {
+        formData.append("description", categorydata.description);
+      }
+      if (categorydata.status) {
+        formData.append("status", categorydata.status);
+      }
+      if (categorydata.images) {
+        formData.append(`images`, categorydata.images);
+      }
 
       const response = await URL.post(`${CATEGORY_API}`, formData, {
         headers: {
@@ -63,61 +73,78 @@ export const addCategoryApi = (categorydata, handleClose, limit, page) => {
       dispatch(fetchAllCategoriesApi(limit, page));
       handleClose();
     } catch (error) {
-      if(error.response){
-      dispatch(categoryError(error.response.data.error));
-      setTimeout(() => {
-        dispatch(categoryError(null));
-      }, 3000);
-    }
+      if (error.response) {
+        dispatch(categoryError(error.response.data.error));
+        setTimeout(() => {
+          dispatch(categoryError(null));
+        }, 3000);
+      }
     }
   };
 };
 
-export const updateCategoryApi = (id, categorydata,handleClose,limit,page) => {
+export const updateCategoryApi = (
+  id,
+  categorydata,
+  handleClose,
+  limit,
+  page
+) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
       // Append other category data to the form data
-      formData.append("name", categorydata.name);
-      formData.append("description", categorydata.description);
-      formData.append("status", categorydata.status);
-      formData.append(`images`, categorydata.images);
+      if (categorydata.name) {
+        formData.append("name", categorydata.name);
+      }
+      if (categorydata.description) {
+        formData.append("description", categorydata.description);
+      }
+      if (categorydata.status) {
+        formData.append("status", categorydata.status);
+      }
+      if (categorydata.images) {
+        formData.append(`images`, categorydata.images);
+      }
 
       const response = await URL.patch(`${CATEGORY_API}/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
-        } 
+        }
       });
 
-   dispatch(fetchAllCategoriesApi(limit, page));
+      dispatch(fetchAllCategoriesApi(limit, page));
       handleClose();
     } catch (error) {
-      if(error.response){
-      dispatch(categoryError(error.response.data.error));
-      setTimeout(() => {
-        dispatch(categoryError(null));
-      }, 3000);
-    }
+      if (error.response) {
+        dispatch(categoryError(error.response.data.error));
+        setTimeout(() => {
+          dispatch(categoryError(null));
+        }, 3000);
+      }
     }
   };
 };
 
-export const updateCategoryStatusApi = (id, categorydata,limit,page) => {
+export const updateCategoryStatusApi = (id, categorydata, limit, page) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
-
+      if(categorydata.status && id){
       formData.append("status", categorydata.status);
-     
-      const response = await URL.patch(`${CATEGORY_STATUS_API}/${id}`, formData);
+      const response = await URL.patch(
+        `${CATEGORY_STATUS_API}/${id}`,
+        formData
+      );
+    }
       dispatch(fetchAllCategoriesApi(limit, page));
     } catch (error) {
-      if(error.response){
-      dispatch(categoryError(error.response.data.error));
-      setTimeout(() => {
-        dispatch(categoryError(null));
-      }, 3000);
-    }
+      if (error.response) {
+        dispatch(categoryError(error.response.data.error));
+        setTimeout(() => {
+          dispatch(categoryError(null));
+        }, 3000);
+      }
     }
   };
-}
+};

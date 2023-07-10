@@ -8,17 +8,20 @@ import {
   TextField,
   MenuItem
 } from "@mui/material";
+import {
+  fetchAllCategoriesApi
+} from "../../api/CategoryApi";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addProductApi, updateProductApi } from "../../api/ProductApi";
 import { productError } from "../../store/slices/ProductSlice";
 
 export default function AddProductDialog({ open, onClose, product,limit,page }) {
+  const categories = useSelector((state) => state.categories.categories);  
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  
-
+  const [category, setCategory] = useState("");
   const [images, setSelectedImage] = useState([]);
 
   const handleFileChange = (event) => {
@@ -26,13 +29,15 @@ export default function AddProductDialog({ open, onClose, product,limit,page }) 
     setSelectedImage(files);
   };
 
- 
+
 
   const error = useSelector((state) => state.products.error);
   const dispatch = useDispatch();
 
 
-
+  useEffect(() => {
+    dispatch(fetchAllCategoriesApi());
+  }, [dispatch]);
 
 
   useEffect(() => {
@@ -41,6 +46,7 @@ export default function AddProductDialog({ open, onClose, product,limit,page }) 
       setName(product.name);
       setDescription(product.description)
       setPrice(product.price);
+      setCategory(product.category._id);
       
     } else {
       resetForm();
@@ -58,8 +64,10 @@ export default function AddProductDialog({ open, onClose, product,limit,page }) 
       name,
       description,
       price,   
+      category,
       images  
     };
+
 
     if (product?._id) {
       // If user prop is provided, update the existing user
@@ -73,6 +81,7 @@ export default function AddProductDialog({ open, onClose, product,limit,page }) 
     setName("");
     setDescription("");
     setPrice("");
+    setCategory("");
     setSelectedImage([]);
 
    
@@ -109,14 +118,20 @@ open={open} onClose={handleClose}>
       helperText={error?.description || ""}
       />
 
-<TextField
+    <TextField
+      sx={{ my: 1 }}
       select
       label="Category"
       fullWidth  
+      value={category}
+      onChange={(e) => setCategory(e.target.value)}
+      error={!!error?.category}
+      helperText={error?.category || ""}
     >
-      <MenuItem value="option1">Option 1</MenuItem>
-      <MenuItem value="option2">Option 2</MenuItem>
-      <MenuItem value="option3">Option 3</MenuItem>
+      {categories.map((category,index) => (
+      <MenuItem key={index} value={category._id}>{category.name}</MenuItem>
+      ))}
+
     </TextField>
          
       

@@ -45,13 +45,26 @@ export const addProductApi = (productdata, handleClose, limit, page) => {
     try {
       const formData = new FormData();
       // Append other product data to the form data
-      formData.append("name", productdata.name);
-      formData.append("description", productdata.description);
-      formData.append("price", productdata.price);
+
+      if (productdata.name) {
+        formData.append("name", productdata.name);
+      }
+      if (productdata.description) {
+        formData.append("description", productdata.description);
+      }
+      if (productdata.price) {
+        formData.append("price", productdata.price);
+      }
+
+      if (productdata.category) {
+        formData.append("category", productdata.category);
+      }
 
       // Append images to the form data
       productdata.images.forEach((image, index) => {
+        if(image){
         formData.append(`images`, image);
+      }
       });
 
       const response = await URL.post(`${PRODUCTS_API}`, formData, {
@@ -75,14 +88,26 @@ export const updateProductApi = (id, productdata, handleClose, limit, page) => {
   return async (dispatch) => {
     try {
       const formData = new FormData();
-      // Append other product data to the form data
+          // Append other product data to the form data
+      if(productdata.name){
       formData.append("name", productdata.name);
+      }
+      if(productdata.description){
       formData.append("description", productdata.description);
+      }
+      if(productdata.price){
       formData.append("price", productdata.price);
+      }
+      if(productdata.category){
+      formData.append("category", productdata.category);
+      }
 
       // Append images to the form data
+     
       productdata.images.forEach((image, index) => {
-        formData.append(`images`, image);
+      if(image){        
+      formData.append(`images`, image);
+      }
       });
 
       const response = await URL.patch(`${PRODUCTS_API}/${id}`, formData, {
