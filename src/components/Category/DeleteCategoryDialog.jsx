@@ -7,12 +7,12 @@ import {
   Button
 } from "@mui/material";
 
-export default function DeleteProductDialog({ open, onClose, onDelete}) {
+export default function DeleteCategoryDialog({ open, onClose, onDelete}) {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Confirm Delete</DialogTitle>
       <DialogContent>
-        <p>Are you sure you want to delete this Product?</p>
+        <p>Are you sure you want to delete this Category?</p>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} variant="contained" color="secondary">Cancel</Button>

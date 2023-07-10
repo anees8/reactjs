@@ -9,11 +9,11 @@ import {
   Paper,
   Button,
   TablePagination,
-  Container,TextField
+  TextField
 } from "@mui/material";
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProductsApi, deleteProduct } from "../../api/ProductApi";
+import { fetchAllCategoriesApi, deleteCategoryApi } from "../../api/CategoryApi";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
@@ -22,61 +22,61 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import UnfoldMoreOutlinedIcon from "@mui/icons-material/UnfoldMoreOutlined";
 
 import AddIcon from "@mui/icons-material/Add";
-import DeleteProductDialog from "./DeleteProductDialog";
-import AddProductDialog from "./AddProductDialog";
+import DeleteCategoryDialog from "./DeleteCategoryDialog";
+import AddCategoryDialog from "./AddCategoryDialog";
 import { BASE_URL } from "../../config/constant/apiConstant";
-import { setOrderBy } from "../../store/slices/ProductSlice";
+import { setOrderBy } from "../../store/slices/CategorySlice";
 
-const Product = () => {
-  const products = useSelector((state) => state.products.products);
+const Category  = () => {
+  const categories = useSelector((state) => state.categories.categories);
   const dispatch = useDispatch();
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
-  const [addProductDialogOpen, setAddProductDialogOpen] = useState(false);
-  const [editProduct, setEditProduct] = useState(null);
-  const limit = useSelector((state) => state.products.limit);
-  const page = useSelector((state) => state.products.page);
-  const totalRow = useSelector((state) => state.products.totalRow);
-  const orderBy = useSelector((state) => state.products.orderBy);
+  const [addCategoryDialogOpen, setAddCategoryDialogOpen] = useState(false);
+  const [editCategory, setEditCategory] = useState(null);
+  const limit = useSelector((state) => state.categories.limit);
+  const page = useSelector((state) => state.categories.page);
+  const totalRow = useSelector((state) => state.categories.totalRow);
+  const orderBy = useSelector((state) => state.categories.orderBy);
 
 
   const handleSort = (column) => {
     if (orderBy === column) {
       dispatch(setOrderBy(`-${column}`));
-      dispatch(fetchAllProductsApi(limit, page + 1, `-${column}`));
+      dispatch(fetchAllCategoriesApi(limit, page + 1, `-${column}`));
     } else if (orderBy === `-${column}`) {
       dispatch(setOrderBy(null));
-      dispatch(fetchAllProductsApi(limit, page + 1));
+      dispatch(fetchAllCategoriesApi(limit, page + 1));
     } else {
       dispatch(setOrderBy(column));
-      dispatch(fetchAllProductsApi(limit, page + 1, column));
+      dispatch(fetchAllCategoriesApi(limit, page + 1, column));
     }
   };
 
   const handleSearchChange = (event) => {
-    dispatch(fetchAllProductsApi(limit,1, orderBy,event.target.value));
+    dispatch(fetchAllCategoriesApi(limit,1, orderBy,event.target.value));
   };
 
   const handleChangePage = (event, newPage) => {
-    dispatch(fetchAllProductsApi(limit, newPage + 1, orderBy));
+    dispatch(fetchAllCategoriesApi(limit, newPage + 1, orderBy));
   };
 
   const handleChangeLimit = (event) => {
-    dispatch(fetchAllProductsApi(event.target.value, 0, orderBy));
+    dispatch(fetchAllCategoriesApi(event.target.value, 0, orderBy));
   };
 
-  const openAddProductDialog = (product) => {
-    setEditProduct(product);
-    setAddProductDialogOpen(true);
+  const openAddCategoryDialog = (category) => {
+    setEditCategory(category);
+    setAddCategoryDialogOpen(true);
   };
 
-  const closeAddProductDialog = () => {
-    setEditProduct(null);
-    setAddProductDialogOpen(false);
+  const closeAddCategoryDialog = () => {
+    setEditCategory(null);
+    setAddCategoryDialogOpen(false);
   };
 
-  const deleteSingleProduct = (id) => {
+  const deleteSingleCategory = (id) => {
     dispatch(
-      deleteProduct(
+      deleteCategoryApi(
         id,
         limit,
         Math.round(totalRow / ((page + 1) * limit)) == page ? page + 1 : page
@@ -93,7 +93,7 @@ const Product = () => {
     setDeleteConfirmation(null);
   };
   useEffect(() => {
-    dispatch(fetchAllProductsApi(limit, page + 1, orderBy));
+    dispatch(fetchAllCategoriesApi(limit, page + 1, orderBy));
   }, [dispatch]);
 
   return (
@@ -118,9 +118,9 @@ const Product = () => {
           <Button
             variant="outlined"
             color="primary"
-            onClick={openAddProductDialog}
+            onClick={openAddCategoryDialog}
           >
-            <AddIcon /> Product
+            <AddIcon /> Category
           </Button>
         </div>
         
@@ -149,7 +149,7 @@ const Product = () => {
               <TableRow>
                 <TableCell>ID</TableCell>
                 <TableCell onClick={() => handleSort("name")}>
-                  Product Name{" "}
+                  Category Name{" "}
                   {orderBy === "name" ? (
                     <ArrowDropDownIcon />
                   ) : orderBy === "-name" ? (
@@ -168,50 +168,42 @@ const Product = () => {
                     <UnfoldMoreOutlinedIcon style={{ opacity: 0.5 }} />
                   )}
                 </TableCell>
-                <TableCell onClick={() => handleSort("price")}>
-                  Price{" "}
-                  {orderBy === "price" ? (
-                    <ArrowDropDownIcon />
-                  ) : orderBy === "-price" ? (
-                    <ArrowDropUpIcon />
-                  ) : (
-                    <UnfoldMoreOutlinedIcon style={{ opacity: 0.5 }} />
-                  )}
-                </TableCell>
-                <TableCell>Images</TableCell>
+                
+                <TableCell>Image</TableCell>
+                <TableCell>Status</TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.length === 0 ? (
+              {categories.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={5}>No records found.</TableCell>
                 </TableRow>
               ) : (
-                products.map((product) => (
-                  <TableRow key={product._id}>
-                    <TableCell>{product._id}</TableCell>
-                    <TableCell>{product.name}</TableCell>
-                    <TableCell>{product.description}</TableCell>
-                    <TableCell>{product.price}</TableCell>
+                categories.map((category) => (
+                  <TableRow key={category._id}>
+                    <TableCell>{category._id}</TableCell>
+                    <TableCell>{category.name}</TableCell>
+                    <TableCell>{category.description}</TableCell>
                     <TableCell>
                       {" "}
-                      {product.images.map((image, index) => (
+                      {category.images.map((image, index) => (
                         <img
                           // crossOrigin="anonymous"
                           key={index}
                           src={BASE_URL + image}
                           width={50}
-                          alt="Product Image"
+                          alt="Category Image"
                         />
                       ))}
                     </TableCell>
+                    <TableCell>{category.status}</TableCell>
                     <TableCell>
                       <Button
                         variant="outlined"
                         color="secondary"
                         sx={{ margin: "2px" }}
-                        onClick={() => openAddProductDialog(product)}
+                        onClick={() => openAddCategoryDialog(category)}
                       >
                         {" "}
                         <EditOutlinedIcon />
@@ -220,7 +212,7 @@ const Product = () => {
                         variant="outlined"
                         color="error"
                         sx={{ margin: "2px" }}
-                        onClick={() => openDeleteConfirmation(product._id)}
+                        onClick={() => openDeleteConfirmation(category._id)}
                       >
                         {" "}
                         <DeleteOutlineOutlinedIcon />
@@ -231,17 +223,17 @@ const Product = () => {
               )}
             </TableBody>
           </Table>
-          <AddProductDialog
-            open={addProductDialogOpen}
-            onClose={closeAddProductDialog}
-            product={editProduct}
+          <AddCategoryDialog
+            open={addCategoryDialogOpen}
+            onClose={closeAddCategoryDialog}
+            category={editCategory}
             limit={limit}
             page={page + 1}
           />
-          <DeleteProductDialog
+          <DeleteCategoryDialog
             open={!!deleteConfirmation}
             onClose={closeDeleteConfirmation}
-            onDelete={() => deleteSingleProduct(deleteConfirmation)}
+            onDelete={() => deleteSingleCategory(deleteConfirmation)}
           />
         </TableContainer>
         <TablePagination
@@ -260,4 +252,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Category;

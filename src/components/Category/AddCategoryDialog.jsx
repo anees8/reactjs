@@ -9,14 +9,12 @@ import {
 } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addProductApi, updateProductApi } from "../../api/ProductApi";
-import { productError } from "../../store/slices/ProductSlice";
+import { addCategoryApi, updateCategoryApi } from "../../api/CategoryApi";
+import { categoryError } from "../../store/slices/CategorySlice";
 
-export default function AddProductDialog({ open, onClose, product,limit,page }) {
+export default function AddProductDialog({ open, onClose, category,limit,page }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  
 
   const [images, setSelectedImage] = useState([]);
 
@@ -25,9 +23,8 @@ export default function AddProductDialog({ open, onClose, product,limit,page }) 
     setSelectedImage(files);
   };
 
- 
 
-  const error = useSelector((state) => state.products.error);
+  const error = useSelector((state) => state.categories.error);
   const dispatch = useDispatch();
 
 
@@ -35,43 +32,40 @@ export default function AddProductDialog({ open, onClose, product,limit,page }) 
 
 
   useEffect(() => {
-    if (product?._id) {
+    if (category?._id) {
       // If user prop is provided, populate the form fields with user data for editing
-      setName(product.name);
-      setDescription(product.description)
-      setPrice(product.price);
+      setName(category.name);
+      setDescription(category.description)
       
     } else {
       resetForm();
     }
-  }, [product]);
+  }, [category]);
 
   const handleClose = () => {
     onClose();
     resetForm();
-    dispatch(productError(null));
+    dispatch(categoryError(null));
   };
 
-  const handleAddProduct = () => {
-    const productData = {
+  const handleAddCategory = () => {
+    const categoryData = {
       name,
-      description,
-      price,   
+      description,  
       images  
     };
 
-    if (product?._id) {
+    if (category?._id) {
       // If user prop is provided, update the existing user
-      dispatch(updateProductApi(product._id, productData, handleClose,limit,page));
+      dispatch(updateCategoryApi(category._id, categoryData, handleClose,limit,page));
     } else {
       // If user prop is not provided, add a new user
-      dispatch(addProductApi(productData, handleClose,limit,page));
+      dispatch(addCategoryApi(categoryData, handleClose,limit,page));
     }
   };
   const resetForm = () => {
     setName("");
     setDescription("");
-    setPrice("");
     setSelectedImage([]);
 
    
@@ -83,14 +77,14 @@ export default function AddProductDialog({ open, onClose, product,limit,page }) 
     <Dialog       sx={{ '& .MuiDialog-paper': { width: '80%' } }}
     maxWidth="xs"
 open={open} onClose={handleClose}>
-      <DialogTitle>{product?._id ? "Edit Product" : "Add Product"}</DialogTitle>
+      <DialogTitle>{category?._id ? "Edit Category" : "Add Category"}</DialogTitle>
 
       <DialogContent>
         <TextField
           value={name}
           onChange={(e) => setName(e.target.value)}
           sx={{ my: 1 }}
-          label="Product Name"
+          label="Category Name"
           fullWidth
           error={!!error?.name}
           helperText={error?.name || ""}
@@ -101,7 +95,7 @@ open={open} onClose={handleClose}>
       value={description}
       onChange={(e) => setDescription(e.target.value)}
       sx={{ my: 1 }}
-      label="Product Description"
+      label="Category Description"
       multiline
       rows={4}
       error={!!error?.description}
@@ -110,17 +104,7 @@ open={open} onClose={handleClose}>
 
 
          
-      
-        <TextField
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          sx={{ my: 1 }}
-          label="Price"
-          fullWidth
-          error={!!error?.price}
-          helperText={error?.price || ""}
-        />
-
+    
           <TextField
           id="outlined-basic"
           label="Images"
@@ -152,8 +136,8 @@ open={open} onClose={handleClose}>
         <Button onClick={handleClose} variant="contained"  color="secondary">
           Cancel
         </Button>
-        <Button onClick={handleAddProduct} variant="contained" color="primary">
-          {product?._id ? "Update Product" : "Add Product"}
+        <Button onClick={handleAddCategory} variant="contained" color="primary">
+          {category?._id ? "Update Category" : "Add Category"}
         </Button>
       </DialogActions>
     </Dialog>
