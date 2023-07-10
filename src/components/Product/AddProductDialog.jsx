@@ -6,6 +6,7 @@ import {
   DialogActions,
   Button,
   TextField,
+  MenuItem
 } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -108,7 +109,15 @@ open={open} onClose={handleClose}>
       helperText={error?.description || ""}
       />
 
-
+<TextField
+      select
+      label="Category"
+      fullWidth  
+    >
+      <MenuItem value="option1">Option 1</MenuItem>
+      <MenuItem value="option2">Option 2</MenuItem>
+      <MenuItem value="option3">Option 3</MenuItem>
+    </TextField>
          
       
         <TextField

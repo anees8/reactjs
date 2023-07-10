@@ -7,3 +7,4 @@ export const POST_REGISTER_API='register';
 export const PRODUCTS_API='products';
 export const CATEGORIES_API='categories';
 export const CATEGORY_API='category';
+export const CATEGORY_STATUS_API='categoryStatus';
